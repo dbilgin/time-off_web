@@ -5,8 +5,6 @@
   "author": "Deniz Bilgin",
   "private": true,
   "scripts": {
-    "build:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt build",
-    "generate:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
