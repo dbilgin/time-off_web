@@ -1,14 +1,18 @@
 import colors from 'vuetify/es5/util/colors'
+// only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/<repository-name>/'
+  }
+} : {}
 
 export default {
+  ...routerBase,
   generate: {
     dir: 'docs'
   },
   mode: 'universal',
   // mode: 'spa',
-  router: {
-    base: '/time-off_web/'
-  },
   /*
    ** Headers of the page
    */
