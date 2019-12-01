@@ -16,7 +16,8 @@ export default (ctx) => {
           error: '#ff5722',
           warning: '#ffeb3b',
           info: '#607d8b',
-          success: '#8bc34a'
+          success: '#8bc34a',
+          background: '#FFFFFF'
         },
         dark: {
           primary: colors.blue.darken2,
@@ -25,7 +26,8 @@ export default (ctx) => {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          success: colors.green.accent3,
+          background: '#000000'
         }
       }
     }

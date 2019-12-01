@@ -1,6 +1,8 @@
-import axios from 'axios'
-
-const token = localStorage.getItem('token')
-if (token) {
-  axios.defaults.headers.common.Authorization = token
+export default ({ store, redirect, app: { $axios, $cookies } }) => {
+  const token = $cookies.get('access')
+  if (token) {
+    $axios.defaults.headers.common.Authorization = token
+  } else {
+    redirect('/login')
+  }
 }
