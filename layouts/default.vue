@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="true" :light="false">
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -37,6 +37,14 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <v-select
+        :items="themes"
+        :value="selectedTheme"
+        v-on:change="themeSelected"
+        label="Select Theme"
+        solo
+      ></v-select>
+      <v-spacer />
       <v-btn @click.stop="rightDrawer = !rightDrawer" icon>
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -68,9 +76,14 @@
 export default {
   data() {
     return {
+      selectedTheme: null,
       clipped: false,
       drawer: false,
       fixed: false,
+      themes: [
+        { text: 'Light', value: 'light' },
+        { text: 'Dark', value: 'dark' }
+      ],
       items: [
         {
           icon: 'mdi-apps',
@@ -87,6 +100,16 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js'
+    }
+  },
+  beforeMount() {
+    this.selectedTheme = localStorage.getItem('theme')
+  },
+  methods: {
+    themeSelected(value) {
+      this.selectedTheme = value
+      localStorage.setItem('theme', value)
+      this.$vuetify.theme.dark = value === 'dark'
     }
   }
 }

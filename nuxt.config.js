@@ -33,7 +33,7 @@ export default {
    */
   plugins: [
     { ssr: false, src: '@plugins/auth-settings' },
-    { ssr: true, src: '@plugins/vuetify' }
+    { ssr: false, src: '@plugins/vuetify' }
   ],
   /*
    ** Nuxt.js dev-modules
@@ -65,7 +65,6 @@ export default {
   // vuetify: {
   //   customVariables: ['~/assets/variables.scss'],
   //   theme: {
-  //     dark: true,
   //     themes: {
   //       light: {
   //         primary: '#673ab7',

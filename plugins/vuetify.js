@@ -8,7 +8,6 @@ export default (ctx) => {
   const vuetify = new Vuetify({
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
       themes: {
         light: {
           primary: '#673ab7',
@@ -31,6 +30,8 @@ export default (ctx) => {
       }
     }
   })
+
+  vuetify.framework.theme.dark = localStorage.getItem('theme') === 'dark'
 
   ctx.app.vuetify = vuetify
   ctx.$vuetify = vuetify.framework
