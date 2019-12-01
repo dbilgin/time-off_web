@@ -102,7 +102,7 @@ export default {
       title: 'Vuetify.js'
     }
   },
-  beforeMount() {
+  mounted() {
     this.selectedTheme = localStorage.getItem('theme')
   },
   methods: {
