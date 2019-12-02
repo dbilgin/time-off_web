@@ -78,7 +78,6 @@
 
 <script>
 export default {
-  // middleware: 'authenticated',
   data() {
     return {
       selectedTheme: null,
