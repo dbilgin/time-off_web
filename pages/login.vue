@@ -22,7 +22,8 @@ export default {
 
 <style lang="less">
 #layout {
-  background-image: url('/backgrounds/snowy.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('/backgrounds/snowy.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
