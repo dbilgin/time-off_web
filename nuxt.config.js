@@ -40,7 +40,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ ssr: false, src: '@plugins/vuetify' }],
+  plugins: [
+    { ssr: false, src: '@plugins/vuetify' },
+    { ssr: true, src: '@plugins/auth-settings' }
+  ],
   /*
    ** Nuxt.js dev-modules
    */

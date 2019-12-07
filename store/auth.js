@@ -57,7 +57,8 @@ export const actions = {
       if (response.status === 200 && response.data) {
         this.$cookies.set('access', response.data.access)
         this.$cookies.set('refresh', response.data.refresh)
-        this.$axios.defaults.headers.common.Authorization = response.data.access
+        this.$axios.defaults.headers.common.Authorization =
+          'Bearer ' + response.data.access
         this.$router.push('/')
       } else {
         context.commit('error', true)

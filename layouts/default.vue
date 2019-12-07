@@ -1,7 +1,9 @@
 <template>
   <v-app
     :style="{
-      background: $vuetify.theme.themes.dark.background
+      background: selectedTheme
+        ? $vuetify.theme.themes[selectedTheme].background
+        : $vuetify.theme.themes.light.background
     }"
   >
     <v-navigation-drawer
