@@ -16,15 +16,17 @@
           <span>Was guckst du?</span>
         </v-tooltip>
       </v-toolbar>
-      <v-alert
-        v-if="$store.state.auth.error"
-        type="error"
-        style="border-radius: 0;"
-      >
-        Wrong e-mail or password.
-      </v-alert>
+      <transition name="fade" mode="out-in">
+        <v-alert
+          v-if="$store.state.auth.error"
+          type="error"
+          style="border-radius: 0;"
+        >
+          Wrong e-mail or password.
+        </v-alert>
+      </transition>
       <v-card-text>
-        <v-form>
+        <v-form @keyup.native.enter="login">
           <v-text-field
             v-model="username"
             @input="textFieldChange"
@@ -74,7 +76,7 @@ export default {
   data: () => {
     return {
       username: 'denizcanbilgin@gmail.com',
-      password: 'jaram'
+      password: 'Timeoff*1234'
     }
   },
   methods: {

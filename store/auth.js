@@ -13,6 +13,19 @@ export const mutations = {
 }
 
 export const actions = {
+  validatePassword(context, { newPassword, newPasswordRepeat }) {
+    if (
+      newPassword !== newPasswordRepeat ||
+      !newPassword ||
+      !newPasswordRepeat
+    ) {
+      return false
+    }
+    if (newPassword.length < 8 || !newPassword.search(/^[0-9a-zA-Z]+$/)) {
+      return false
+    }
+    return true
+  },
   async resetPassword(context, { resetToken, password, confirmPassword }) {
     context.commit('loader', true)
     try {

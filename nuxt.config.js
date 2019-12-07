@@ -36,7 +36,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['~assets/transitions.less'],
   /*
    ** Plugins to load before mounting the App
    */
