@@ -13,6 +13,26 @@ export const mutations = {
 }
 
 export const actions = {
+  async resetPassword(context, { resetToken, password, confirmPassword }) {
+    context.commit('loader', true)
+    try {
+      const response = await this.$axios.post('/api/auth/reset-password/', {
+        reset_token: resetToken,
+        password,
+        confirm_password: confirmPassword
+      })
+
+      if (response.status === 204) {
+        this.$router.push('/login')
+      } else {
+        context.commit('error', true)
+      }
+    } catch (err) {
+      context.commit('error', true)
+    } finally {
+      context.commit('loader', false)
+    }
+  },
   async login(context, { email, password }) {
     context.commit('loader', true)
     try {
@@ -36,9 +56,11 @@ export const actions = {
     }
   },
   async forgotPassword(context, { email }) {
+    context.commit('loader', true)
     const response = await this.$axios.post('/api/auth/forgot-password/', {
       email
     })
+    context.commit('loader', false)
     return response
   }
 }

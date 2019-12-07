@@ -87,7 +87,7 @@ export default {
       }
     },
     textFieldChange() {
-      this.$store.commit('auth/error', false)
+      if (this.$store.state.auth.error) this.$store.commit('auth/error', false)
     }
   }
 }
