@@ -1,7 +1,7 @@
 <template>
   <v-btn-toggle
     @change="(index) => setTheme(index === 1 ? 'dark' : 'light')"
-    :value="$store.state.theme.selectedThemeName === 'dark' ? 1 : 0"
+    :value="$store.state.utils.selectedThemeName === 'dark' ? 1 : 0"
     active-class="themeSelect"
     borderless
     dense

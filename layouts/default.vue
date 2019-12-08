@@ -36,9 +36,11 @@
         <v-app-bar-nav-icon @click.stop="drawerMinified = !drawerMinified" />
         <v-toolbar-title v-text="title" />
         <v-spacer />
-        <v-btn text color="primary" rounded>
-          <v-icon>mdi-account</v-icon>
-        </v-btn>
+
+        <nuxt-link :to="switchLocalePath('en')">en</nuxt-link>
+        <v-spacer />
+        <nuxt-link :to="switchLocalePath('es')">es</nuxt-link>
+        <account />
       </v-app-bar>
       <v-content>
         <v-container>
@@ -58,9 +60,9 @@
 </template>
 
 <script>
-import { ThemePicker } from '../components/Utils'
+import { ThemePicker, Account } from '../components/Dashboard'
 export default {
-  components: { ThemePicker },
+  components: { ThemePicker, Account },
   data() {
     return {
       mounting: true,
@@ -69,16 +71,16 @@ export default {
         { text: 'Light', value: 'light' },
         { text: 'Dark', value: 'dark' }
       ],
-      title: 'Time-Off',
+      title: this.$t('common.appName'),
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Home',
+          title: this.$t('dashboard.dashboard'),
           to: '/'
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Leave Requests',
+          title: this.$t('dashboard.leaveRequests'),
           to: '/leave-requests'
         }
       ]
@@ -86,8 +88,8 @@ export default {
   },
   computed: {
     background() {
-      return this.$store.state.theme.selectedTheme
-        ? this.$store.state.theme.selectedTheme.background
+      return this.$store.state.utils.selectedTheme
+        ? this.$store.state.utils.selectedTheme.background
         : 'white'
     }
   },
@@ -101,7 +103,7 @@ export default {
     setTheme(selectedTheme) {
       localStorage.setItem('theme', selectedTheme)
       this.$vuetify.theme.dark = selectedTheme === 'dark'
-      this.$store.commit('theme/setTheme', {
+      this.$store.commit('utils/setTheme', {
         theme: this.$vuetify.theme.themes[selectedTheme],
         themeName: selectedTheme
       })

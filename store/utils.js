@@ -1,4 +1,5 @@
 export const state = () => ({
+  locale: 'en',
   selectedTheme: {
     primary: '#673ab7',
     secondary: '#FFFFFF',

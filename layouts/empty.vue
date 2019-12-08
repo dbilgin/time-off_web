@@ -1,5 +1,5 @@
 <template>
-  <v-app :style="{ background: $vuetify.theme.themes['light'].background }">
+  <v-app :style="{ background: $store.state.utils.selectedTheme.background }">
     <nuxt />
   </v-app>
 </template>

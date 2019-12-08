@@ -1,0 +1,29 @@
+{
+  "login": {
+    "login": "Login",
+    "username": "Username",
+    "password": "Password",
+    "forgotPassword": "Forgot Password",
+    "register": "Register",
+    "wrongCredentials": "Wrong e-mail or password.",
+    "checkYourEmail": "Please check your e-mail for the password reset link."
+  },
+  "profile": {
+    "myProfile": "My Profile",
+    "logOut": "Log Out"
+  },
+  "dashboard": {
+    "dashboard": "Dashboard",
+    "leaveRequests": "Leave Requests"
+  },
+  "leaveRequests": {
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "type": "Type",
+    "status": "Status"
+  },
+  "common": {
+    "appName": "Time-Off",
+    "submit": "Submit"
+  }
+}

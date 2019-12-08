@@ -66,7 +66,27 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    [
+      'nuxt-i18n',
+      {
+        lazy: true,
+        langDir: 'locales/',
+        detectBrowserLanguage: {
+          useCookie: true,
+          cookieKey: 'i18n_redirected'
+        },
+        strategy: 'prefix_except_default',
+        locales: [
+          { code: 'en', file: 'en.json' },
+          { code: 'es', file: 'es.json' }
+        ],
+        defaultLocale: 'en',
+        vueI18n: {
+          fallbackLocale: 'en'
+        }
+      }
+    ]
   ],
   /*
    ** vuetify module configuration

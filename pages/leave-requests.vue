@@ -12,45 +12,45 @@
 <script>
 import { formatDate } from '@/assets/calculate'
 export default {
-  data: () => {
-    return {
-      headers: [
+  computed: {
+    headers() {
+      return [
         {
-          text: 'Start Date',
+          text: this.$t('leaveRequests.startDate'),
           align: 'left',
           sortable: true,
           value: 'start'
         },
         {
-          text: 'End Date',
+          text: this.$t('leaveRequests.endDate'),
           align: 'left',
           sortable: true,
           value: 'end'
         },
         {
-          text: 'Type',
+          text: this.$t('leaveRequests.type'),
           align: 'left',
           sortable: true,
           value: 'type'
         },
         {
-          text: 'Status',
+          text: this.$t('leaveRequests.status'),
           align: 'left',
           sortable: true,
           value: 'status'
         }
       ]
-    }
-  },
-  computed: {
+    },
     leaves() {
       const asyncRequests = this.leaveRequests
-      asyncRequests.forEach((asyncRequest) => {
-        const start = new Date(asyncRequest.start)
-        const end = new Date(asyncRequest.end)
-        asyncRequest.start = formatDate(start)
-        asyncRequest.end = formatDate(end)
-      })
+      if (asyncRequests) {
+        asyncRequests.forEach((asyncRequest) => {
+          const start = new Date(asyncRequest.start)
+          const end = new Date(asyncRequest.end)
+          asyncRequest.start = formatDate(start)
+          asyncRequest.end = formatDate(end)
+        })
+      }
       return asyncRequests
     }
   },

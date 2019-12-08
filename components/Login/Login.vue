@@ -4,7 +4,9 @@
       <v-card :style="primaryBg" class="ml-5 mr-5 elevation-12 pa-7">
         <v-toolbar :style="primaryBg" flat>
           <v-spacer />
-          <v-toolbar-title class="white--text">Login</v-toolbar-title>
+          <v-toolbar-title class="white--text">{{
+            $t('login.login')
+          }}</v-toolbar-title>
           <v-spacer />
         </v-toolbar>
       </v-card>
@@ -13,17 +15,17 @@
           <v-text-field
             v-model="username"
             @input="textFieldChange"
-            label="Username"
+            :label="$t('login.username')"
             name="login"
             prepend-icon="person"
-            type="text"
+            type="email"
           />
 
           <v-text-field
             id="password"
             v-model="password"
             @input="textFieldChange"
-            label="Password"
+            :label="$t('login.password')"
             name="password"
             prepend-icon="lock"
             type="password"
@@ -35,13 +37,13 @@
           @click="changeCard(cardTypes.FORGOT_PASSWORD)"
           text
           class="caption"
-          >Forgot Password</v-btn
+          >{{ $t('login.forgotPassword') }}</v-btn
         >
         <v-spacer />
-        <v-btn @click="changeCard(cardTypes.REGISTER)" text color="primary"
-          >Register</v-btn
-        >
-        <v-btn @click="login" color="primary">Login</v-btn>
+        <v-btn @click="changeCard(cardTypes.REGISTER)" text color="primary">{{
+          $t('login.register')
+        }}</v-btn>
+        <v-btn @click="login" color="primary">{{ $t('login.login') }}</v-btn>
       </v-card-actions>
       <transition name="fade" mode="out-in">
         <v-alert
@@ -49,7 +51,7 @@
           class="mb-0 borderRadiusBottom"
           type="error"
         >
-          Wrong e-mail or password.
+          {{ $t('login.wrongCredentials') }}
         </v-alert>
       </transition>
       <v-overlay :value="$store.state.auth.loading">
@@ -81,7 +83,7 @@ export default {
     primaryBg() {
       return (
         'background-color: ' +
-        this.$store.state.theme.selectedTheme.primary +
+        this.$store.state.utils.selectedTheme.primary +
         ';'
       )
     }
