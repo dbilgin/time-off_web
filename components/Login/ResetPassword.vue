@@ -5,25 +5,6 @@
         <v-toolbar-title>Reset Password</v-toolbar-title>
         <v-spacer />
       </v-toolbar>
-      <transition name="fade" mode="out-in">
-        <v-alert
-          key="storeError"
-          v-if="$store.state.auth.error"
-          type="error"
-          style="border-radius: 0;"
-        >
-          Check your passwords and try again.
-        </v-alert>
-        <v-alert
-          key="validationError"
-          v-if="conditionError"
-          type="error"
-          style="border-radius: 0;"
-        >
-          Your passwords must match, be alphanumeric and also longer than 8
-          characters.
-        </v-alert>
-      </transition>
       <v-card-text>
         <v-form @keyup.native.enter="resetPassword">
           <v-text-field
@@ -52,6 +33,25 @@
           >Submit</v-btn
         >
       </v-card-actions>
+      <transition name="fade" mode="out-in">
+        <v-alert
+          key="storeError"
+          v-if="$store.state.auth.error"
+          class="mb-0 borderRadiusBottom"
+          type="error"
+        >
+          Check your passwords and try again.
+        </v-alert>
+        <v-alert
+          key="validationError"
+          v-if="conditionError"
+          class="mb-0 borderRadiusBottom"
+          type="error"
+        >
+          Your passwords must match, be alphanumeric and also longer than 8
+          characters.
+        </v-alert>
+      </transition>
       <v-overlay :value="$store.state.auth.loading">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
       </v-overlay>

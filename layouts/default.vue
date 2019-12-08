@@ -1,58 +1,70 @@
 <template>
   <v-app
     :style="{
-      background: selectedTheme
-        ? $vuetify.theme.themes[selectedTheme].background
-        : $vuetify.theme.themes.light.background
+      background: background
     }"
   >
-    <v-navigation-drawer :mini-variant="drawer" fixed app>
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-select
-        :items="themes"
-        :value="selectedTheme"
-        v-on:change="themeSelected"
-        label="Select Theme"
-        solo
-      ></v-select>
-    </v-app-bar>
-    <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-content>
-    <v-footer :fixed="false" app>
-      <span>&copy; 2019</span>
-    </v-footer>
+    <v-container v-if="!mounting">
+      <v-navigation-drawer :mini-variant="drawerMinified" fixed app>
+        <v-list>
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            :to="item.to"
+            router
+            exact
+          >
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title" />
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+
+        <theme-picker v-if="!drawerMinified" :set-theme="setTheme" />
+      </v-navigation-drawer>
+      <v-app-bar
+        :style="{
+          background: background
+        }"
+        fixed
+        app
+        class="elevation-0"
+      >
+        <v-app-bar-nav-icon @click.stop="drawerMinified = !drawerMinified" />
+        <v-toolbar-title v-text="title" />
+        <v-spacer />
+        <v-btn text color="primary" rounded>
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
+      </v-app-bar>
+      <v-content>
+        <v-container>
+          <transition name="fade-pages" mode="out-in">
+            <nuxt />
+          </transition>
+        </v-container>
+      </v-content>
+      <v-footer :fixed="false" app>
+        <span>&copy; 2019</span>
+      </v-footer>
+    </v-container>
+    <v-overlay v-else :value="true">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   </v-app>
 </template>
 
 <script>
+import { ThemePicker } from '../components/Utils'
 export default {
+  components: { ThemePicker },
   data() {
     return {
-      selectedTheme: null,
-      drawer: true,
+      mounting: true,
+      drawerMinified: false,
       themes: [
         { text: 'Light', value: 'light' },
         { text: 'Dark', value: 'dark' }
@@ -66,26 +78,39 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          title: 'Leave Requests',
+          to: '/leave-requests'
         }
       ]
     }
   },
-  mounted() {
-    let theme = localStorage.getItem('theme')
-    if (!theme) {
-      theme = 'light'
-      localStorage.setItem('theme', theme)
+  computed: {
+    background() {
+      return this.$store.state.theme.selectedTheme
+        ? this.$store.state.theme.selectedTheme.background
+        : 'white'
     }
-    this.selectedTheme = theme
+  },
+  mounted() {
+    setTimeout(() => {
+      this.mounting = false
+      this.setTheme(localStorage.getItem('theme') || 'light')
+    }, 10)
   },
   methods: {
-    themeSelected(value) {
-      this.selectedTheme = value
-      localStorage.setItem('theme', value)
-      this.$vuetify.theme.dark = value === 'dark'
+    setTheme(selectedTheme) {
+      localStorage.setItem('theme', selectedTheme)
+      this.$vuetify.theme.dark = selectedTheme === 'dark'
+      this.$store.commit('theme/setTheme', {
+        theme: this.$vuetify.theme.themes[selectedTheme],
+        themeName: selectedTheme
+      })
     }
   }
 }
 </script>
+<style>
+.themeSelect {
+  border-radius: 24px !important;
+}
+</style>

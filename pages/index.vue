@@ -1,7 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <nuxt-link to="/login">To Login</nuxt-link>
-    <nuxt-link to="/inspire">Inspire</nuxt-link>
+    <nuxt-link to="/leave-requests">Leave Requests</nuxt-link>
 
     <v-list-item
       v-for="(leaveRequest, index) in leaveRequests"

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import colors from 'vuetify/es5/util/colors'
 Vue.use(Vuetify)
 
 export default (ctx) => {
@@ -11,29 +10,28 @@ export default (ctx) => {
       themes: {
         light: {
           primary: '#673ab7',
-          secondary: '#3f51b5',
+          secondary: '#FFFFFF',
           accent: '#f44336',
           error: '#ff5722',
           warning: '#ffeb3b',
           info: '#607d8b',
           success: '#8bc34a',
-          background: '#FFFFFF'
+          background: '#fafafa'
         },
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
-          background: '#000000'
+          primary: '#4caf50',
+          secondary: '#4caf50',
+          tertiary: '#495057',
+          accent: '#82B1FF',
+          error: '#f55a4e',
+          info: '#00d3ee',
+          success: '#5cb860',
+          warning: '#ffa21a',
+          background: '#383535'
         }
       }
     }
   })
-
-  vuetify.framework.theme.dark = localStorage.getItem('theme') === 'dark'
 
   ctx.app.vuetify = vuetify
   ctx.$vuetify = vuetify.framework
