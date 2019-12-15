@@ -10,7 +10,13 @@
   },
   "profile": {
     "myProfile": "My Profile",
-    "logOut": "Log Out"
+    "logOut": "Log Out",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "preferredName": "Preferred Name",
+    "gender": "Gender",
+    "birthdate": "Birthdate",
+    "email": "E-Mail"
   },
   "dashboard": {
     "dashboard": "Dashboard",
@@ -22,8 +28,16 @@
     "type": "Type",
     "status": "Status"
   },
+  "validation": {
+    "emailRequired": "E-mail is required",
+    "emailValid": "E-mail must be valid",
+    "nameRequired": "Name is required",
+    "nameValidLength": "Name must be at least 2 characters",
+    "genderRequired": "Gender is required"
+  },
   "common": {
     "appName": "Time-Off",
-    "submit": "Submit"
+    "submit": "Submit",
+    "save": "Save"
   }
 }

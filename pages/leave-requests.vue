@@ -4,17 +4,34 @@
       :headers="headers"
       :items="leaves"
       disable-pagination
+      hide-default-footer
       class="elevation-5 flex"
     >
+      <template v-slot:header.start="{ header }">
+        <v-icon>mdi-calendar-today</v-icon>
+        {{ header.text }}
+      </template>
+      <template v-slot:header.end="{ header }">
+        <v-icon>mdi-calendar</v-icon>
+        {{ header.text }}
+      </template>
       <template v-slot:item="props">
         <tr>
           <td class="text-xs">{{ props.item.start }}</td>
           <td class="text-xs">{{ props.item.end }}</td>
-          <td class="text-xs">{{ props.item.type }}</td>
+          <td class="text-xs">
+            <v-icon>
+              {{ typeIcons[props.item.type] }}
+            </v-icon>
+            {{
+              props.item.type.charAt(0).toUpperCase() +
+                props.item.type.toLowerCase().slice(1)
+            }}
+          </td>
           <td class="text-xs">
             <v-tooltip top>
               <template v-slot:activator="{ on }">
-                <v-icon v-on="on" :color="statusTypeColours[props.item.status]"
+                <v-icon v-on="on" :color="statusColours[props.item.status]"
                   >mdi-circle</v-icon
                 >
               </template>
@@ -35,10 +52,16 @@ import { formatDate } from '@/assets/calculate'
 export default {
   data: () => {
     return {
-      statusTypeColours: {
+      statusColours: {
         APPROVED: 'green',
         PENDING: 'orange',
         REJECTED: 'red'
+      },
+      typeIcons: {
+        MATERNITY: 'mdi-human-pregnant',
+        VACATION: 'mdi-white-balance-sunny',
+        UNPAID: 'mdi-currency-usd-off',
+        SICK: 'mdi-pill'
       }
     }
   },

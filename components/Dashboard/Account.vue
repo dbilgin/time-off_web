@@ -32,7 +32,7 @@ export default {
           icon: 'mdi-tag-faces',
           title: this.$t('profile.myProfile'),
           action: () => {
-            alert()
+            this.$router.push('/profile')
           }
         },
         {

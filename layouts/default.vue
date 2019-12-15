@@ -10,6 +10,7 @@
         color="rgb(78, 78, 78)"
         fixed
         app
+        permanent
       >
         <v-list>
           <v-list-item
