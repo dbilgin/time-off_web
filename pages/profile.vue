@@ -81,7 +81,7 @@
         <v-btn
           :disabled="!valid"
           @click="validate"
-          color="success"
+          color="primary"
           class="mr-4"
         >
           {{ $t('common.save') }}
