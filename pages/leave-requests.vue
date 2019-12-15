@@ -5,13 +5,43 @@
       :items="leaves"
       disable-pagination
       class="elevation-5 flex"
-    ></v-data-table>
+    >
+      <template v-slot:item="props">
+        <tr>
+          <td class="text-xs">{{ props.item.start }}</td>
+          <td class="text-xs">{{ props.item.end }}</td>
+          <td class="text-xs">{{ props.item.type }}</td>
+          <td class="text-xs">
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-icon v-on="on" :color="statusTypeColours[props.item.status]"
+                  >mdi-circle</v-icon
+                >
+              </template>
+              <span>{{
+                props.item.status.charAt(0).toUpperCase() +
+                  props.item.status.toLowerCase().slice(1)
+              }}</span>
+            </v-tooltip>
+          </td>
+        </tr>
+      </template>
+    </v-data-table>
   </v-layout>
 </template>
 
 <script>
 import { formatDate } from '@/assets/calculate'
 export default {
+  data: () => {
+    return {
+      statusTypeColours: {
+        APPROVED: 'green',
+        PENDING: 'orange',
+        REJECTED: 'red'
+      }
+    }
+  },
   computed: {
     headers() {
       return [

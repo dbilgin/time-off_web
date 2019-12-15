@@ -5,7 +5,12 @@
     }"
   >
     <v-container v-if="!mounting">
-      <v-navigation-drawer :mini-variant="drawerMinified" fixed app>
+      <v-navigation-drawer
+        :mini-variant="drawerMinified"
+        color="rgb(78, 78, 78)"
+        fixed
+        app
+      >
         <v-list>
           <v-list-item
             v-for="(item, i) in items"
@@ -13,16 +18,16 @@
             :to="item.to"
             router
             exact
+            active-class="active-list-item"
           >
             <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon color="white">{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
+              <v-list-item-title v-text="item.title" class="white--text" />
             </v-list-item-content>
           </v-list-item>
         </v-list>
-
         <theme-picker v-if="!drawerMinified" :set-theme="setTheme" />
       </v-navigation-drawer>
       <v-app-bar
@@ -36,10 +41,6 @@
         <v-app-bar-nav-icon @click.stop="drawerMinified = !drawerMinified" />
         <v-toolbar-title v-text="title" />
         <v-spacer />
-
-        <nuxt-link :to="switchLocalePath('en')">en</nuxt-link>
-        <v-spacer />
-        <nuxt-link :to="switchLocalePath('es')">es</nuxt-link>
         <account />
       </v-app-bar>
       <v-content>
@@ -49,7 +50,7 @@
           </transition>
         </v-container>
       </v-content>
-      <v-footer :fixed="false" app>
+      <v-footer :fixed="false" app inset>
         <span>&copy; 2019</span>
       </v-footer>
     </v-container>
@@ -114,5 +115,11 @@ export default {
 <style>
 .themeSelect {
   border-radius: 24px !important;
+}
+.active-list-item {
+  background-color: #673ab7;
+  color: #673ab7 !important;
+  border-radius: 10px;
+  margin: 0 10px 0 10px;
 }
 </style>
