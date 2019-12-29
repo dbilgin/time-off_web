@@ -16,7 +16,9 @@
     "preferredName": "Preferred Name",
     "gender": "Gender",
     "birthdate": "Birthdate",
-    "email": "E-Mail"
+    "email": "E-Mail",
+    "profileUpdated": "Profile updated!",
+    "errorUpdate": "Error updating profile"
   },
   "dashboard": {
     "dashboard": "Dashboard",
@@ -38,6 +40,8 @@
   "common": {
     "appName": "Time-Off",
     "submit": "Submit",
-    "save": "Save"
+    "save": "Save",
+    "ok": "OK",
+    "cancel": "Cancel"
   }
 }

@@ -23,6 +23,11 @@
         />
 
         <v-text-field
+          v-model="userData.preferred_name"
+          :label="$t('profile.preferredName')"
+        />
+
+        <v-text-field
           v-model="userData.email"
           :rules="[
             (v) => !!v || $t('validation.emailRequired'),
@@ -67,15 +72,8 @@
             no-title
             scrollable
             actions
-          >
-            <template slot-scope="{ save, cancel }">
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn @click="cancel" flat color="primary">Cancel</v-btn>
-                <v-btn @click="save" flat color="primary">OK</v-btn>
-              </v-card-actions>
-            </template>
-          </v-date-picker>
+            first-day-of-week="1"
+          />
         </v-menu>
 
         <v-btn
@@ -88,12 +86,17 @@
         </v-btn>
       </v-form>
     </v-container>
+    <v-snackbar v-model="snackbar" color="success" timeout="2000">
+      {{ isError ? $t('profile.errorUpdate') : $t('profile.profileUpdated') }}
+    </v-snackbar>
   </v-layout>
 </template>
 <script>
 export default {
   data: () => {
     return {
+      isError: false,
+      snackbar: false,
       dateMenu: false,
       valid: true,
       genders: [
@@ -107,10 +110,15 @@ export default {
     return { userData: data }
   },
   methods: {
-    validate() {
+    async validate() {
       if (this.$refs.form.validate()) {
-      } else {
-        alert('hi')
+        const { status } = await this.$axios.put('/api/auth/me', this.userData)
+        if (status === 200) {
+          this.isError = false
+        } else {
+          this.isError = true
+        }
+        this.snackbar = true
       }
     }
   }
