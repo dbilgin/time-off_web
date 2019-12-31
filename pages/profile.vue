@@ -45,8 +45,6 @@
           required
         />
 
-        <!-- <v-date-picker v-model="userData.birth_date"></v-date-picker> -->
-
         <v-menu
           :close-on-content-click="false"
           v-model="dateMenu"

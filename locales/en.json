@@ -28,14 +28,19 @@
     "startDate": "Start Date",
     "endDate": "End Date",
     "type": "Type",
-    "status": "Status"
+    "status": "Status",
+    "request": "Request Leave",
+    "information": "Request Information",
+    "description": "Description"
   },
   "validation": {
     "emailRequired": "E-mail is required",
     "emailValid": "E-mail must be valid",
     "nameRequired": "Name is required",
     "nameValidLength": "Name must be at least 2 characters",
-    "genderRequired": "Gender is required"
+    "genderRequired": "Gender is required",
+    "dateRequired": "Date is required",
+    "typeRequired": "Type is required"
   },
   "common": {
     "appName": "Time-Off",
