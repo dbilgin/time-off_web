@@ -133,8 +133,10 @@ export default {
     return { leaveRequests: data }
   },
   methods: {
-    setDialog(display) {
+    async setDialog(display) {
       this.displayDialog = display
+      const { data } = await this.$axios.get('/api/leave-requests')
+      this.leaveRequests = data
     }
   }
 }

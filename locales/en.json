@@ -40,7 +40,8 @@
     "nameValidLength": "Name must be at least 2 characters",
     "genderRequired": "Gender is required",
     "dateRequired": "Date is required",
-    "typeRequired": "Type is required"
+    "typeRequired": "Type is required",
+    "dateBigger": "End date can't be before the start date."
   },
   "common": {
     "appName": "Time-Off",

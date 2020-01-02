@@ -47,6 +47,7 @@
 
                 <v-date-picker
                   v-model="startDate"
+                  @change="() => (startDateMenu = false)"
                   no-title
                   scrollable
                   actions
@@ -70,7 +71,12 @@
                     v-on="on"
                     v-model="endDate"
                     :label="$t('leaveRequests.endDate')"
-                    :rules="[(v) => !!v || $t('validation.dateRequired')]"
+                    :rules="[
+                      (v) => !!v || $t('validation.dateRequired'),
+                      (v) =>
+                        new Date(v) >= new Date(startDate) ||
+                        $t('validation.dateBigger')
+                    ]"
                     prepend-icon="event"
                     readonly
                   />
@@ -78,6 +84,7 @@
 
                 <v-date-picker
                   v-model="endDate"
+                  @change="() => (endDateMenu = false)"
                   no-title
                   scrollable
                   actions
@@ -130,16 +137,16 @@ export default {
   data() {
     return {
       leaveTypes: [
-        { value: 'maternity', text: 'Maternity' },
-        { value: 'vacation', text: 'Vacation' },
-        { value: 'unpaid', text: 'Unpaid' },
-        { value: 'sick', text: 'Sick' }
+        { value: 'MATERNITY', text: 'Maternity' },
+        { value: 'VACATION', text: 'Vacation' },
+        { value: 'UNPAID', text: 'Unpaid' },
+        { value: 'SICK', text: 'Sick' }
       ],
       startDateMenu: false,
       endDateMenu: false,
       startDate: '',
       endDate: '',
-      type: { value: 'sick', text: 'Sick' },
+      type: 'SICK',
       description: '',
       valid: true,
       loading: false
@@ -150,10 +157,10 @@ export default {
       if (this.$refs.form.validate()) {
         this.loading = true
         await this.$axios.post('/api/leave-requests/', {
-          start: this.startDate,
-          end: this.endDate,
+          start: new Date(this.startDate),
+          end: new Date(this.endDate),
           description: this.description,
-          type: this.type.value
+          type: this.type
         })
         this.loading = false
         this.setDialog(false)
